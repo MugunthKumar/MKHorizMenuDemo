@@ -215,7 +215,7 @@
 					</object>
 					<string>{{673, 376}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>MKHorizMenuDemoAppDelegate</string>
+					<string>HorizontalMenuAppDelegate</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>{{186, 376}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -259,7 +259,7 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">MKHorizMenuDemoAppDelegate</string>
+					<string key="className">HorizontalMenuAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -295,7 +295,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">MKHorizMenuDemoAppDelegate.h</string>
+						<string key="minorKey">HorizontalMenuAppDelegate.h</string>
 					</object>
 				</object>
 			</object>
@@ -535,7 +535,7 @@
 			<integer value="3100" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">MKHorizMenuDemo.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">HorizontalMenu.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<string key="IBCocoaTouchPluginVersion">112</string>
 	</data>

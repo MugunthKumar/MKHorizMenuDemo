@@ -16,6 +16,10 @@
 		AB369A7D1366816200888B0E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB369A7B1366816200888B0E /* MainWindow.xib */; };
 		AB369A801366816200888B0E /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB369A7F1366816200888B0E /* RootViewController.m */; };
 		AB369A831366816200888B0E /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB369A811366816200888B0E /* RootViewController.xib */; };
+		AB369AA71366830900888B0E /* ButtonSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = AB369AA21366830900888B0E /* ButtonSelected.png */; };
+		AB369AA81366830900888B0E /* MenuBar.png in Resources */ = {isa = PBXBuildFile; fileRef = AB369AA31366830900888B0E /* MenuBar.png */; };
+		AB369AA91366830900888B0E /* MenuBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB369AA41366830900888B0E /* MenuBar@2x.png */; };
+		AB369AAA1366830900888B0E /* MKHorizMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = AB369AA61366830900888B0E /* MKHorizMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,16 +27,21 @@
 		AB369A691366816200888B0E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AB369A6B1366816200888B0E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AB369A6D1366816200888B0E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		AB369A711366816200888B0E /* MKHorizMenuDemo-Info.plist */ = {isa = PBXFileReference; path = "MKHorizMenuDemo-Info.plist"; sourceTree = "<group>"; };
+		AB369A711366816200888B0E /* MKHorizMenuDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MKHorizMenuDemo-Info.plist"; sourceTree = "<group>"; };
 		AB369A731366816200888B0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AB369A751366816200888B0E /* MKHorizMenuDemo-Prefix.pch */ = {isa = PBXFileReference; path = "MKHorizMenuDemo-Prefix.pch"; sourceTree = "<group>"; };
+		AB369A751366816200888B0E /* MKHorizMenuDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MKHorizMenuDemo-Prefix.pch"; sourceTree = "<group>"; };
 		AB369A761366816200888B0E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AB369A781366816200888B0E /* MKHorizMenuDemoAppDelegate.h */ = {isa = PBXFileReference; path = MKHorizMenuDemoAppDelegate.h; sourceTree = "<group>"; };
+		AB369A781366816200888B0E /* MKHorizMenuDemoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKHorizMenuDemoAppDelegate.h; sourceTree = "<group>"; };
 		AB369A791366816200888B0E /* MKHorizMenuDemoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MKHorizMenuDemoAppDelegate.m; sourceTree = "<group>"; };
 		AB369A7C1366816200888B0E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		AB369A7E1366816200888B0E /* RootViewController.h */ = {isa = PBXFileReference; path = RootViewController.h; sourceTree = "<group>"; };
+		AB369A7E1366816200888B0E /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		AB369A7F1366816200888B0E /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		AB369A821366816200888B0E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
+		AB369AA21366830900888B0E /* ButtonSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonSelected.png; sourceTree = "<group>"; };
+		AB369AA31366830900888B0E /* MenuBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuBar.png; sourceTree = "<group>"; };
+		AB369AA41366830900888B0E /* MenuBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MenuBar@2x.png"; sourceTree = "<group>"; };
+		AB369AA51366830900888B0E /* MKHorizMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKHorizMenu.h; sourceTree = "<group>"; };
+		AB369AA61366830900888B0E /* MKHorizMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKHorizMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +61,7 @@
 		AB369A5A1366816200888B0E = {
 			isa = PBXGroup;
 			children = (
+				AB369AA11366830900888B0E /* MKHorizMenu */,
 				AB369A6F1366816200888B0E /* MKHorizMenuDemo */,
 				AB369A681366816200888B0E /* Frameworks */,
 				AB369A661366816200888B0E /* Products */,
@@ -99,6 +109,18 @@
 				AB369A761366816200888B0E /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AB369AA11366830900888B0E /* MKHorizMenu */ = {
+			isa = PBXGroup;
+			children = (
+				AB369AA21366830900888B0E /* ButtonSelected.png */,
+				AB369AA31366830900888B0E /* MenuBar.png */,
+				AB369AA41366830900888B0E /* MenuBar@2x.png */,
+				AB369AA51366830900888B0E /* MKHorizMenu.h */,
+				AB369AA61366830900888B0E /* MKHorizMenu.m */,
+			);
+			path = MKHorizMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +176,9 @@
 				AB369A741366816200888B0E /* InfoPlist.strings in Resources */,
 				AB369A7D1366816200888B0E /* MainWindow.xib in Resources */,
 				AB369A831366816200888B0E /* RootViewController.xib in Resources */,
+				AB369AA71366830900888B0E /* ButtonSelected.png in Resources */,
+				AB369AA81366830900888B0E /* MenuBar.png in Resources */,
+				AB369AA91366830900888B0E /* MenuBar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +192,7 @@
 				AB369A771366816200888B0E /* main.m in Sources */,
 				AB369A7A1366816200888B0E /* MKHorizMenuDemoAppDelegate.m in Sources */,
 				AB369A801366816200888B0E /* RootViewController.m in Sources */,
+				AB369AAA1366830900888B0E /* MKHorizMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +305,7 @@
 				AB369A881366816200888B0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
