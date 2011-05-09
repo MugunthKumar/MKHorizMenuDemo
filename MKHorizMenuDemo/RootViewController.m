@@ -12,6 +12,7 @@
 
 @synthesize tabView = _tabView;
 @synthesize items = _items;
+@synthesize selectionItemLabel = _selectionItemLabel;
 
 
 - (void)viewDidLoad
@@ -35,6 +36,7 @@
 
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     // For example: self.myOutlet = nil;
+    self.selectionItemLabel = nil;
 }
 
 - (void)dealloc
@@ -64,6 +66,7 @@
 
 -(void) horizMenu:(MKHorizMenu *)horizMenu itemSelectedAtIndex:(NSUInteger)index
 {        
+    self.selectionItemLabel.text = [self.items objectAtIndex:index];
     NSLog(@"%@", [self.items objectAtIndex:index]);
 }
 @end

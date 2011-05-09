@@ -12,9 +12,12 @@
 
     MKHorizMenu *_tabView;
     NSMutableArray *_items;
+    
+    UILabel *_selectionItemLabel;
 }
 
 @property (nonatomic, retain) IBOutlet MKHorizMenu *tabView;
 @property (nonatomic, retain) NSMutableArray *items;
+@property (nonatomic, assign) IBOutlet UILabel *selectionItemLabel;
 
 @end
