@@ -10,15 +10,15 @@
 
 @implementation RootViewController
 
-@synthesize tabView = _tabView;
+@synthesize horizMenu = _horizMenu;
 @synthesize items = _items;
 @synthesize selectionItemLabel = _selectionItemLabel;
 
 
 - (void)viewDidLoad
 {
-    self.items = [NSArray arrayWithObjects:@"Headlines", @"UK", @"International", @"Politics", @"Sports", @"Others", nil];    
-    [self.tabView reloadData];
+    self.items = [NSArray arrayWithObjects:@"Headlines", @"UK", @"International", @"Politics", @"Weather", @"Travel", @"Radio", @"Hollywood", @"Sports", @"Others", nil];    
+    [self.horizMenu reloadData];
     [super viewDidLoad];
 }
 
@@ -39,11 +39,18 @@
     self.selectionItemLabel = nil;
 }
 
+-(void) viewDidAppear:(BOOL)animated
+{
+    [self.horizMenu setSelectedIndex:5 animated:YES];
+}
+
 - (void)dealloc
 {
     [super dealloc];
 }
 
+#pragma mark -
+#pragma mark HorizMenu Data Source
 - (UIImage*) selectedItemImageForMenu:(MKHorizMenu*) tabMenu
 {
     return [[UIImage imageNamed:@"ButtonSelected"] stretchableImageWithLeftCapWidth:16 topCapHeight:0];
@@ -64,9 +71,10 @@
     return [self.items objectAtIndex:index];
 }
 
+#pragma mark -
+#pragma mark HorizMenu Delegate
 -(void) horizMenu:(MKHorizMenu *)horizMenu itemSelectedAtIndex:(NSUInteger)index
 {        
     self.selectionItemLabel.text = [self.items objectAtIndex:index];
-    NSLog(@"%@", [self.items objectAtIndex:index]);
 }
 @end

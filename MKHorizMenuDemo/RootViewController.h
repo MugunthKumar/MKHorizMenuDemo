@@ -10,13 +10,13 @@
 #import "MKHorizMenu.h"
 @interface RootViewController : UIViewController <MKHorizMenuDataSource, MKHorizMenuDelegate> {
 
-    MKHorizMenu *_tabView;
+    MKHorizMenu *_horizMenu;
     NSMutableArray *_items;
     
     UILabel *_selectionItemLabel;
 }
 
-@property (nonatomic, retain) IBOutlet MKHorizMenu *tabView;
+@property (nonatomic, retain) IBOutlet MKHorizMenu *horizMenu;
 @property (nonatomic, retain) NSMutableArray *items;
 @property (nonatomic, assign) IBOutlet UILabel *selectionItemLabel;
 
