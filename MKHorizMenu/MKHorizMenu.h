@@ -23,6 +23,9 @@
 @class MKHorizMenu;
 
 @protocol MKHorizMenuDataSource <NSObject>
+@optional
+- (UIColor*) textColorForMenu:(MKHorizMenu*) tabView;
+- (UIColor*) selectedTextColorForMenu:(MKHorizMenu*) tabView;
 @required
 - (UIImage*) selectedItemImageForMenu:(MKHorizMenu*) tabView;
 - (UIColor*) backgroundColorForMenu:(MKHorizMenu*) tabView;
@@ -40,6 +43,8 @@
 
     int _itemCount;
     UIImage *_selectedImage;
+    UIColor *_textColor;
+    UIColor *_selectedTextColor;    
     NSMutableArray *_titles;
     id <MKHorizMenuDataSource> dataSource;
     id <MKHorizMenuDelegate> itemSelectedDelegate;

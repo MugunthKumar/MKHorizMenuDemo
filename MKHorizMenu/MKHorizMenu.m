@@ -45,7 +45,14 @@
     self.itemCount = [dataSource numberOfItemsForMenu:self];
     self.backgroundColor = [dataSource backgroundColorForMenu:self];
     self.selectedImage = [dataSource selectedItemImageForMenu:self];
+    _textColor = _selectedTextColor = [UIColor whiteColor];
+            
+    if ([dataSource respondsToSelector:@selector(textColorForMenu:)]) 
+        _textColor = [dataSource textColorForMenu:self];
 
+    if ([dataSource respondsToSelector:@selector(selectedTextColorForMenu:)]) 
+        _selectedTextColor = [dataSource selectedTextColorForMenu:self];
+    
     UIFont *buttonFont = [UIFont boldSystemFontOfSize:15];
     int buttonPadding = 25;
     
@@ -57,6 +64,8 @@
         NSString *title = [dataSource horizMenu:self titleForItemAtIndex:i];
         UIButton *customButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [customButton setTitle:title forState:UIControlStateNormal];
+        [customButton setTitleColor:_textColor forState:UIControlStateNormal];
+        [customButton setTitleColor:_selectedTextColor forState:UIControlStateSelected];
         customButton.titleLabel.font = buttonFont;
         
         [customButton setBackgroundImage:self.selectedImage forState:UIControlStateSelected];
