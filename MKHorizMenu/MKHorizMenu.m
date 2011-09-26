@@ -42,6 +42,11 @@
      
 -(void) reloadData
 {
+    for (UIView *view in self.subviews) 
+    {
+        [view removeFromSuperview];
+    }
+    
     self.itemCount = [dataSource numberOfItemsForMenu:self];
     self.backgroundColor = [dataSource backgroundColorForMenu:self];
     self.selectedImage = [dataSource selectedItemImageForMenu:self];
