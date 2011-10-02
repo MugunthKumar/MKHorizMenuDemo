@@ -50,13 +50,6 @@
     self.itemCount = [dataSource numberOfItemsForMenu:self];
     self.backgroundColor = [dataSource backgroundColorForMenu:self];
     self.selectedImage = [dataSource selectedItemImageForMenu:self];
-    _textColor = _selectedTextColor = [UIColor whiteColor];
-            
-    if ([dataSource respondsToSelector:@selector(textColorForMenu:)]) 
-        _textColor = [dataSource textColorForMenu:self];
-
-    if ([dataSource respondsToSelector:@selector(selectedTextColorForMenu:)]) 
-        _selectedTextColor = [dataSource selectedTextColorForMenu:self];
     
     UIFont *buttonFont = [UIFont boldSystemFontOfSize:15];
     int buttonPadding = 25;
@@ -67,10 +60,20 @@
     for(int i = 0 ; i < self.itemCount; i ++)
     {
         NSString *title = [dataSource horizMenu:self titleForItemAtIndex:i];
+        UIColor *textColorForButton = [UIColor whiteColor];
+        UIColor *selectedTextColorForButton = [UIColor whiteColor];
+        
+        if ([dataSource respondsToSelector:@selector(horizMenu:textColorForItemAtIndex:)]) 
+            textColorForButton = [dataSource horizMenu:self textColorForItemAtIndex:i];
+
+        if ([dataSource respondsToSelector:@selector(horizMenu:selectedColorForItemAtIndex:)]) 
+            selectedTextColorForButton = [dataSource horizMenu:self selectedColorForItemAtIndex:i];
+
+        
         UIButton *customButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [customButton setTitle:title forState:UIControlStateNormal];
-        [customButton setTitleColor:_textColor forState:UIControlStateNormal];
-        [customButton setTitleColor:_selectedTextColor forState:UIControlStateSelected];
+        [customButton setTitleColor:textColorForButton forState:UIControlStateNormal];
+        [customButton setTitleColor:selectedTextColorForButton forState:UIControlStateSelected];
         customButton.titleLabel.font = buttonFont;
         
         [customButton setBackgroundImage:self.selectedImage forState:UIControlStateSelected];
@@ -86,9 +89,22 @@
         xPos += buttonWidth;
         xPos += buttonPadding;
         [self addSubview:customButton];        
+        
+        if (i < self.itemCount-1) 
+        {
+            UILabel *seperatorLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPos, 7, 10, self.bounds.size.height-7*2)];
+            seperatorLabel.textAlignment = UITextAlignmentCenter;
+            seperatorLabel.font = buttonFont;
+            seperatorLabel.text = @"•";
+            seperatorLabel.textColor = textColorForButton;
+            seperatorLabel.backgroundColor = [UIColor clearColor];
+            //            seperatorLabel.backgroundColor = [UIColor magentaColor];
+            [self addSubview:seperatorLabel];
+            xPos += 10;
+        }
     }
     self.contentSize = CGSizeMake(xPos, self.bounds.size.height);    
-    [self layoutSubviews];  
+    [self layoutSubviews];
 }
 
 

@@ -24,8 +24,8 @@
 
 @protocol MKHorizMenuDataSource <NSObject>
 @optional
-- (UIColor*) textColorForMenu:(MKHorizMenu*) tabView;
-- (UIColor*) selectedTextColorForMenu:(MKHorizMenu*) tabView;
+- (UIColor*) horizMenu:(MKHorizMenu*) horizMenu textColorForItemAtIndex:(NSUInteger) index;
+- (UIColor*) horizMenu:(MKHorizMenu*) horizMenu selectedColorForItemAtIndex:(NSUInteger) index;
 @required
 - (UIImage*) selectedItemImageForMenu:(MKHorizMenu*) tabView;
 - (UIColor*) backgroundColorForMenu:(MKHorizMenu*) tabView;
@@ -43,8 +43,6 @@
 
     int _itemCount;
     UIImage *_selectedImage;
-    UIColor *_textColor;
-    UIColor *_selectedTextColor;    
     NSMutableArray *_titles;
     id <MKHorizMenuDataSource> dataSource;
     id <MKHorizMenuDelegate> itemSelectedDelegate;
@@ -54,6 +52,7 @@
 @property (nonatomic, assign) IBOutlet id <MKHorizMenuDelegate> itemSelectedDelegate;
 @property (nonatomic, retain) IBOutlet id <MKHorizMenuDataSource> dataSource;
 @property (nonatomic, retain) UIImage *selectedImage;
+
 @property (nonatomic, assign) int itemCount;
 
 -(void) reloadData;
