@@ -26,6 +26,8 @@
 @optional
 - (UIColor*) horizMenu:(MKHorizMenu*) horizMenu textColorForItemAtIndex:(NSUInteger) index;
 - (UIColor*) horizMenu:(MKHorizMenu*) horizMenu selectedColorForItemAtIndex:(NSUInteger) index;
+- (int) seperatorPaddingForMenu:(MKHorizMenu*) tabView;
+- (int) buttonPaddingForMenu:(MKHorizMenu*) tabView;
 @required
 - (UIImage*) selectedItemImageForMenu:(MKHorizMenu*) tabView;
 - (UIColor*) backgroundColorForMenu:(MKHorizMenu*) tabView;
@@ -42,6 +44,8 @@
 @interface MKHorizMenu : UIScrollView {
 
     int _itemCount;
+    int _seperatorPadding;
+    int _buttonPadding;
     UIImage *_selectedImage;
     NSMutableArray *_titles;
     id <MKHorizMenuDataSource> dataSource;
@@ -54,6 +58,8 @@
 @property (nonatomic, retain) UIImage *selectedImage;
 
 @property (nonatomic, assign) int itemCount;
+@property (nonatomic, assign) int seperatorPadding;
+@property (nonatomic, assign) int buttonPadding;
 
 -(void) reloadData;
 -(void) setSelectedIndex:(int) index animated:(BOOL) animated;

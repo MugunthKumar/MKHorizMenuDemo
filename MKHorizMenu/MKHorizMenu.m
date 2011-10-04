@@ -18,7 +18,6 @@
 
 #import "MKHorizMenu.h"
 #define kButtonBaseTag 10000
-#define kLeftOffset 10
 
 @implementation MKHorizMenu
 
@@ -28,6 +27,8 @@
 @synthesize itemSelectedDelegate;
 @synthesize dataSource;
 @synthesize itemCount = _itemCount;
+@synthesize seperatorPadding = _seperatorPadding;
+@synthesize buttonPadding = _buttonPadding;
 
 -(void) awakeFromNib
 {
@@ -51,11 +52,21 @@
     self.backgroundColor = [dataSource backgroundColorForMenu:self];
     self.selectedImage = [dataSource selectedItemImageForMenu:self];
     
-    UIFont *buttonFont = [UIFont boldSystemFontOfSize:15];
-    int buttonPadding = 25;
+    if ([dataSource respondsToSelector:@selector(seperatorPaddingForMenu:)]) 
+        self.seperatorPadding = [dataSource seperatorPaddingForMenu:self];
+    else
+        self.seperatorPadding = 10;
+
+    if ([dataSource respondsToSelector:@selector(buttonPaddingForMenu:)]) 
+        self.buttonPadding = [dataSource buttonPaddingForMenu:self];
+    else
+        self.buttonPadding = 10;
+
+    
+    UIFont *buttonFont = [UIFont boldSystemFontOfSize:20];
     
     int tag = kButtonBaseTag;    
-    int xPos = kLeftOffset;
+    int xPos = 10;//self.seperatorPadding;
 
     for(int i = 0 ; i < self.itemCount; i ++)
     {
@@ -85,25 +96,24 @@
                             constrainedToSize:CGSizeMake(150, self.bounds.size.height-7*2) 
                                 lineBreakMode:UILineBreakModeClip].width;
         
-        customButton.frame = CGRectMake(xPos, 7, buttonWidth + buttonPadding, self.bounds.size.height-7*2);
+        customButton.frame = CGRectMake(xPos, 7, buttonWidth + self.buttonPadding, self.bounds.size.height-7*2);
         xPos += buttonWidth;
-        xPos += buttonPadding;
+        xPos += self.buttonPadding;
         [self addSubview:customButton];        
         
         if (i < self.itemCount-1) 
         {
-            UILabel *seperatorLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPos, 7, 10, self.bounds.size.height-7*2)];
+            UILabel *seperatorLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPos, 7, self.seperatorPadding, self.bounds.size.height-7*2)];
             seperatorLabel.textAlignment = UITextAlignmentCenter;
             seperatorLabel.font = buttonFont;
             seperatorLabel.text = @"•";
             seperatorLabel.textColor = textColorForButton;
             seperatorLabel.backgroundColor = [UIColor clearColor];
-            //            seperatorLabel.backgroundColor = [UIColor magentaColor];
             [self addSubview:seperatorLabel];
-            xPos += 10;
+            xPos += self.seperatorPadding;
         }
     }
-    self.contentSize = CGSizeMake(xPos, self.bounds.size.height);    
+    self.contentSize = CGSizeMake(xPos+10, self.bounds.size.height);    
     [self layoutSubviews];
 }
 
@@ -112,7 +122,7 @@
 {
     UIButton *thisButton = (UIButton*) [self viewWithTag:index + kButtonBaseTag];    
     thisButton.selected = YES;
-    [self setContentOffset:CGPointMake(thisButton.frame.origin.x - kLeftOffset, 0) animated:animated];
+    [self setContentOffset:CGPointMake(thisButton.frame.origin.x - self.seperatorPadding, 0) animated:animated];
     [self.itemSelectedDelegate horizMenu:self itemSelectedAtIndex:index];
 }
 
