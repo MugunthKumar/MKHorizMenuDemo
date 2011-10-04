@@ -28,7 +28,8 @@
 @synthesize dataSource;
 @synthesize itemCount = _itemCount;
 @synthesize seperatorPadding = _seperatorPadding;
-@synthesize buttonPadding = _buttonPadding;
+@synthesize itemPadding = _itemPadding;
+@synthesize font = _font;
 
 -(void) awakeFromNib
 {
@@ -57,14 +58,16 @@
     else
         self.seperatorPadding = 10;
 
-    if ([dataSource respondsToSelector:@selector(buttonPaddingForMenu:)]) 
-        self.buttonPadding = [dataSource buttonPaddingForMenu:self];
+    if ([dataSource respondsToSelector:@selector(itemPaddingForMenu:)]) 
+        self.itemPadding = [dataSource itemPaddingForMenu:self];
     else
-        self.buttonPadding = 10;
+        self.itemPadding = 10;
 
-    
-    UIFont *buttonFont = [UIFont boldSystemFontOfSize:20];
-    
+    if ([dataSource respondsToSelector:@selector(fontForMenu:)]) 
+        self.font = [dataSource fontForMenu:self];
+    else
+        self.font = [UIFont boldSystemFontOfSize:15];
+        
     int tag = kButtonBaseTag;    
     int xPos = 10;//self.seperatorPadding;
 
@@ -85,7 +88,7 @@
         [customButton setTitle:title forState:UIControlStateNormal];
         [customButton setTitleColor:textColorForButton forState:UIControlStateNormal];
         [customButton setTitleColor:selectedTextColorForButton forState:UIControlStateSelected];
-        customButton.titleLabel.font = buttonFont;
+        customButton.titleLabel.font = self.font;
         
         [customButton setBackgroundImage:self.selectedImage forState:UIControlStateSelected];
         
@@ -93,19 +96,19 @@
         [customButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
         
         int buttonWidth = [title sizeWithFont:customButton.titleLabel.font
-                            constrainedToSize:CGSizeMake(150, self.bounds.size.height-7*2) 
+                            constrainedToSize:CGSizeMake(320, self.bounds.size.height-7*2) 
                                 lineBreakMode:UILineBreakModeClip].width;
         
-        customButton.frame = CGRectMake(xPos, 7, buttonWidth + self.buttonPadding, self.bounds.size.height-7*2);
+        customButton.frame = CGRectMake(xPos, 7, buttonWidth + self.itemPadding, self.bounds.size.height-7*2);
         xPos += buttonWidth;
-        xPos += self.buttonPadding;
+        xPos += self.itemPadding;
         [self addSubview:customButton];        
         
         if (i < self.itemCount-1) 
         {
             UILabel *seperatorLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPos, 7, self.seperatorPadding, self.bounds.size.height-7*2)];
             seperatorLabel.textAlignment = UITextAlignmentCenter;
-            seperatorLabel.font = buttonFont;
+            seperatorLabel.font = self.font;
             seperatorLabel.text = @"•";
             seperatorLabel.textColor = textColorForButton;
             seperatorLabel.backgroundColor = [UIColor clearColor];
@@ -149,6 +152,8 @@
     _selectedImage = nil;
     [_titles release];
     _titles = nil;
+    [_font release];
+    _font = nil;
     
     [super dealloc];
 }

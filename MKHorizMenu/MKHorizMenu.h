@@ -27,7 +27,8 @@
 - (UIColor*) horizMenu:(MKHorizMenu*) horizMenu textColorForItemAtIndex:(NSUInteger) index;
 - (UIColor*) horizMenu:(MKHorizMenu*) horizMenu selectedColorForItemAtIndex:(NSUInteger) index;
 - (int) seperatorPaddingForMenu:(MKHorizMenu*) tabView;
-- (int) buttonPaddingForMenu:(MKHorizMenu*) tabView;
+- (int) itemPaddingForMenu:(MKHorizMenu*) tabView;
+- (UIFont*) fontForMenu:(MKHorizMenu*) tabView;
 @required
 - (UIImage*) selectedItemImageForMenu:(MKHorizMenu*) tabView;
 - (UIColor*) backgroundColorForMenu:(MKHorizMenu*) tabView;
@@ -45,8 +46,9 @@
 
     int _itemCount;
     int _seperatorPadding;
-    int _buttonPadding;
+    int _itemPadding;
     UIImage *_selectedImage;
+    UIFont  *_font;
     NSMutableArray *_titles;
     id <MKHorizMenuDataSource> dataSource;
     id <MKHorizMenuDelegate> itemSelectedDelegate;
@@ -55,11 +57,14 @@
 @property (nonatomic, retain) NSMutableArray *titles;
 @property (nonatomic, assign) IBOutlet id <MKHorizMenuDelegate> itemSelectedDelegate;
 @property (nonatomic, retain) IBOutlet id <MKHorizMenuDataSource> dataSource;
-@property (nonatomic, retain) UIImage *selectedImage;
 
 @property (nonatomic, assign) int itemCount;
+
+@property (nonatomic, retain) UIImage *selectedImage;
 @property (nonatomic, assign) int seperatorPadding;
-@property (nonatomic, assign) int buttonPadding;
+@property (nonatomic, assign) int itemPadding;
+@property (nonatomic, retain) UIFont *font;
+
 
 -(void) reloadData;
 -(void) setSelectedIndex:(int) index animated:(BOOL) animated;
