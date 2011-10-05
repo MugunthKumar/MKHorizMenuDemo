@@ -49,6 +49,9 @@
         [view removeFromSuperview];
     }
     
+    [self.titles release];
+    self.titles = [[NSMutableArray alloc] initWithCapacity:10];
+    
     self.itemCount = [dataSource numberOfItemsForMenu:self];
     self.backgroundColor = [dataSource backgroundColorForMenu:self];
     self.selectedImage = [dataSource selectedItemImageForMenu:self];
@@ -74,6 +77,7 @@
     for(int i = 0 ; i < self.itemCount; i ++)
     {
         NSString *title = [dataSource horizMenu:self titleForItemAtIndex:i];
+        [self.titles addObject:title];
         UIColor *textColorForButton = [UIColor whiteColor];
         UIColor *selectedTextColorForButton = [UIColor whiteColor];
         
