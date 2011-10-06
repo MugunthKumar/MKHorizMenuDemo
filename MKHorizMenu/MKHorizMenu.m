@@ -93,6 +93,7 @@
         [customButton setTitleColor:textColorForButton forState:UIControlStateNormal];
         [customButton setTitleColor:selectedTextColorForButton forState:UIControlStateSelected];
         customButton.titleLabel.font = self.font;
+        customButton.opaque = YES;
         
         [customButton setBackgroundImage:self.selectedImage forState:UIControlStateSelected];
         
@@ -116,6 +117,7 @@
             seperatorLabel.text = @"•";
             seperatorLabel.textColor = textColorForButton;
             seperatorLabel.backgroundColor = [UIColor clearColor];
+            seperatorLabel.opaque = YES;
             [self addSubview:seperatorLabel];
             xPos += self.seperatorPadding;
         }
