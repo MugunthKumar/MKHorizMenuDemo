@@ -81,20 +81,18 @@
         if([dataSource respondsToSelector:@selector(seperatorColorForMenu:)])
             seperatorColor = [dataSource seperatorColorForMenu:self];
         
-        UIButton *customButton;
+        UIControl *customButton;
         
         if ([dataSource respondsToSelector:@selector(horizMenu:buttonForItemAtIndex:)])
             customButton = [dataSource horizMenu:self buttonForItemAtIndex:i];
         
-        NSString *title = customButton.titleLabel.text;
+        NSString *title = [dataSource horizMenu:self titleForItemAtIndex:i];
         [self.titles addObject:title];
                        
         customButton.tag = tag++;
         [customButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
         
-        int buttonWidth = [title sizeWithFont:customButton.titleLabel.font
-                            constrainedToSize:CGSizeMake(320, self.bounds.size.height-7*2) 
-                                lineBreakMode:UILineBreakModeClip].width;
+        int buttonWidth = [customButton sizeThatFits: CGSizeMake(320, self.bounds.size.height-7*2) ].width;
         
         customButton.frame = CGRectMake(xPos, 7, buttonWidth + self.itemPadding, self.bounds.size.height-7*2);
         xPos += buttonWidth;

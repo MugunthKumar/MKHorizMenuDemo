@@ -28,7 +28,8 @@
 - (UIColor*) seperatorColorForMenu:(MKHorizMenu*) tabView;
 - (int) itemPaddingForMenu:(MKHorizMenu*) tabView;
 @required
-- (UIButton*) horizMenu:(MKHorizMenu*) horizMenu buttonForItemAtIndex:(NSUInteger) index;
+- (UIControl*) horizMenu:(MKHorizMenu*) horizMenu buttonForItemAtIndex:(NSUInteger) index;
+- (NSString*) horizMenu:(MKHorizMenu*) horizMenu titleForItemAtIndex:(NSUInteger) index;
 - (UIColor*) backgroundColorForMenu:(MKHorizMenu*) tabView;
 - (int) numberOfItemsForMenu:(MKHorizMenu*) tabView;
 @end
