@@ -54,7 +54,7 @@
     
     self.itemCount = [dataSource numberOfItemsForMenu:self];
     self.backgroundColor = [dataSource backgroundColorForMenu:self];
-    self.selectedImage = [dataSource selectedItemImageForMenu:self];
+//    self.selectedImage = [dataSource selectedItemImageForMenu:self];
     
     if ([dataSource respondsToSelector:@selector(seperatorPaddingForMenu:)]) 
         self.seperatorPadding = [dataSource seperatorPaddingForMenu:self];
@@ -66,37 +66,29 @@
     else
         self.itemPadding = 10;
 
-    if ([dataSource respondsToSelector:@selector(fontForMenu:)]) 
-        self.font = [dataSource fontForMenu:self];
-    else
-        self.font = [UIFont boldSystemFontOfSize:15];
+//    if ([dataSource respondsToSelector:@selector(fontForMenu:)]) 
+//        self.font = [dataSource fontForMenu:self];
+//    else
+//        self.font = [UIFont boldSystemFontOfSize:15];
         
     int tag = kButtonBaseTag;    
     int xPos = 10;//self.seperatorPadding;
 
     for(int i = 0 ; i < self.itemCount; i ++)
-    {
-        NSString *title = [dataSource horizMenu:self titleForItemAtIndex:i];
+    {       
+        UIColor *seperatorColor = [UIColor blackColor];
+        
+        if([dataSource respondsToSelector:@selector(seperatorColorForMenu:)])
+            seperatorColor = [dataSource seperatorColorForMenu:self];
+        
+        UIButton *customButton;
+        
+        if ([dataSource respondsToSelector:@selector(horizMenu:buttonForItemAtIndex:)])
+            customButton = [dataSource horizMenu:self buttonForItemAtIndex:i];
+        
+        NSString *title = customButton.titleLabel.text;
         [self.titles addObject:title];
-        UIColor *textColorForButton = [UIColor whiteColor];
-        UIColor *selectedTextColorForButton = [UIColor whiteColor];
-        
-        if ([dataSource respondsToSelector:@selector(horizMenu:textColorForItemAtIndex:)]) 
-            textColorForButton = [dataSource horizMenu:self textColorForItemAtIndex:i];
-
-        if ([dataSource respondsToSelector:@selector(horizMenu:selectedColorForItemAtIndex:)]) 
-            selectedTextColorForButton = [dataSource horizMenu:self selectedColorForItemAtIndex:i];
-
-        
-        UIButton *customButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [customButton setTitle:title forState:UIControlStateNormal];
-        [customButton setTitleColor:textColorForButton forState:UIControlStateNormal];
-        [customButton setTitleColor:selectedTextColorForButton forState:UIControlStateSelected];
-        customButton.titleLabel.font = self.font;
-        customButton.opaque = YES;
-        
-        [customButton setBackgroundImage:self.selectedImage forState:UIControlStateSelected];
-        
+                       
         customButton.tag = tag++;
         [customButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -115,7 +107,7 @@
             seperatorLabel.textAlignment = UITextAlignmentCenter;
             seperatorLabel.font = self.font;
             seperatorLabel.text = @"•";
-            seperatorLabel.textColor = textColorForButton;
+            seperatorLabel.textColor = seperatorColor;
             seperatorLabel.backgroundColor = [UIColor clearColor];
             seperatorLabel.opaque = YES;
             [self addSubview:seperatorLabel];

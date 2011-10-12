@@ -24,17 +24,13 @@
 
 @protocol MKHorizMenuDataSource <NSObject>
 @optional
-- (UIColor*) horizMenu:(MKHorizMenu*) horizMenu textColorForItemAtIndex:(NSUInteger) index;
-- (UIColor*) horizMenu:(MKHorizMenu*) horizMenu selectedColorForItemAtIndex:(NSUInteger) index;
 - (int) seperatorPaddingForMenu:(MKHorizMenu*) tabView;
+- (UIColor*) seperatorColorForMenu:(MKHorizMenu*) tabView;
 - (int) itemPaddingForMenu:(MKHorizMenu*) tabView;
-- (UIFont*) fontForMenu:(MKHorizMenu*) tabView;
 @required
-- (UIImage*) selectedItemImageForMenu:(MKHorizMenu*) tabView;
+- (UIButton*) horizMenu:(MKHorizMenu*) horizMenu buttonForItemAtIndex:(NSUInteger) index;
 - (UIColor*) backgroundColorForMenu:(MKHorizMenu*) tabView;
 - (int) numberOfItemsForMenu:(MKHorizMenu*) tabView;
-
-- (NSString*) horizMenu:(MKHorizMenu*) horizMenu titleForItemAtIndex:(NSUInteger) index;
 @end
 
 @protocol MKHorizMenuDelegate <NSObject>

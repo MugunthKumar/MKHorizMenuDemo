@@ -51,9 +51,28 @@
 
 #pragma mark -
 #pragma mark HorizMenu Data Source
-- (UIImage*) selectedItemImageForMenu:(MKHorizMenu*) tabMenu
+
+-(UIButton *)horizMenu:(MKHorizMenu *)horizMenu buttonForItemAtIndex:(NSUInteger)index
 {
-    return [[UIImage imageNamed:@"ButtonSelected"] stretchableImageWithLeftCapWidth:16 topCapHeight:0];
+    UIButton *customButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    NSString *title = [self.items objectAtIndex:index];
+    UIColor  *textColorForButton = [UIColor whiteColor];
+    UIColor  *selectedTextColorForButton = [UIColor whiteColor];
+    
+    if (index == 4) 
+        textColorForButton = [UIColor magentaColor];
+    
+    [customButton setTitle:title forState:UIControlStateNormal];
+    [customButton setTitleColor:textColorForButton forState:UIControlStateNormal];
+    [customButton setTitleColor:selectedTextColorForButton forState:UIControlStateSelected];
+    customButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+
+    return customButton;
+}
+
+-(UIColor *)seperatorColorForMenu:(MKHorizMenu *)tabView
+{
+    return [UIColor whiteColor];
 }
 
 - (UIColor*) backgroundColorForMenu:(MKHorizMenu *)tabView
@@ -66,9 +85,14 @@
     return [self.items count];
 }
 
-- (NSString*) horizMenu:(MKHorizMenu *)horizMenu titleForItemAtIndex:(NSUInteger)index
+- (int) itemPaddingForMenu:(MKHorizMenu *)tabView
 {
-    return [self.items objectAtIndex:index];
+    return 0;
+}
+
+- (int)seperatorPaddingForMenu:(MKHorizMenu *)tabView
+{
+    return 25;
 }
 
 #pragma mark -
