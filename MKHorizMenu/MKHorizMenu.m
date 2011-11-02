@@ -73,6 +73,10 @@
         xPos += buttonPadding;
         [self addSubview:customButton];        
     }
+    
+    // bretdabaker: added right padding to contentSize
+    xPos += kLeftOffset;
+    
     self.contentSize = CGSizeMake(xPos, 41);    
     [self layoutSubviews];  
 }
