@@ -17,11 +17,17 @@
 //	if you are re-publishing after editing, please retain the above copyright notices
 
 #import "MKHorizMenu.h"
+#define kTitleLabelTag 0x6C746974
 #define kButtonBaseTag 10000
+
+@interface MKHorizMenu () 
+-(void) setup;
+@end
 
 @implementation MKHorizMenu
 
 @synthesize titles = _titles;
+@synthesize titleLabel = _titleLabel;
 @synthesize selectedImage = _selectedImage;
 
 @synthesize itemSelectedDelegate;
@@ -31,8 +37,23 @@
 @synthesize itemPadding = _itemPadding;
 @synthesize font = _font;
 
--(void) awakeFromNib
+- (id)initWithFrame:(CGRect)frame 
 {
+    self = [super initWithFrame:frame];
+    if (self) 
+    {
+        [self setup];
+    }
+    return self;
+}
+
+-(void) setup
+{
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 7, 100, 100)];
+    _titleLabel.backgroundColor = [UIColor clearColor];
+    _titleLabel.tag = kTitleLabelTag;
+    [self addSubview:_titleLabel];
+
     self.bounces = YES;
     self.scrollEnabled = YES;
     self.alwaysBounceHorizontal = YES;
@@ -40,13 +61,20 @@
     self.showsHorizontalScrollIndicator = NO;
     self.showsVerticalScrollIndicator = NO;
     [self reloadData];
+
+}
+
+-(void) awakeFromNib
+{
+    [self setup];
 }
      
 -(void) reloadData
 {
     for (UIView *view in self.subviews) 
     {
-        [view removeFromSuperview];
+        if(view.tag != kTitleLabelTag)
+            [view removeFromSuperview];
     }
     
     [self.titles release];
@@ -54,7 +82,6 @@
     
     self.itemCount = [dataSource numberOfItemsForMenu:self];
     self.backgroundColor = [dataSource backgroundColorForMenu:self];
-//    self.selectedImage = [dataSource selectedItemImageForMenu:self];
     
     if ([dataSource respondsToSelector:@selector(seperatorPaddingForMenu:)]) 
         self.seperatorPadding = [dataSource seperatorPaddingForMenu:self];
@@ -65,14 +92,14 @@
         self.itemPadding = [dataSource itemPaddingForMenu:self];
     else
         self.itemPadding = 10;
-
-//    if ([dataSource respondsToSelector:@selector(fontForMenu:)]) 
-//        self.font = [dataSource fontForMenu:self];
-//    else
-//        self.font = [UIFont boldSystemFontOfSize:15];
         
+    int titleWidth = [_titleLabel sizeThatFits: CGSizeMake(320, self.bounds.size.height-7*2) ].width;
+
+    _titleLabel.frame = CGRectMake(10, 7, titleWidth, self.bounds.size.height-7*2);
+    [_titleLabel setNeedsDisplay];
+    
     int tag = kButtonBaseTag;    
-    int xPos = 10;//self.seperatorPadding;
+    int xPos = titleWidth + 10 + 10;//self.seperatorPadding;
 
     for(int i = 0 ; i < self.itemCount; i ++)
     {       

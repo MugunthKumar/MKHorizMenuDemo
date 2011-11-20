@@ -46,12 +46,14 @@
     int _itemPadding;
     UIImage *_selectedImage;
     UIFont  *_font;
+    UILabel *_titleLabel;
     NSMutableArray *_titles;
     id <MKHorizMenuDataSource> dataSource;
     id <MKHorizMenuDelegate> itemSelectedDelegate;
 }
 
 @property (nonatomic, retain) NSMutableArray *titles;
+@property (nonatomic, readonly) UILabel *titleLabel;
 @property (nonatomic, assign) IBOutlet id <MKHorizMenuDelegate> itemSelectedDelegate;
 @property (nonatomic, retain) IBOutlet id <MKHorizMenuDataSource> dataSource;
 
