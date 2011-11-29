@@ -99,7 +99,10 @@
     [_titleLabel setNeedsDisplay];
     
     int tag = kButtonBaseTag;    
-    int xPos = titleWidth + 10 + 10;//self.seperatorPadding;
+    int xPos = titleWidth + 10;//self.seperatorPadding;
+    
+    if(titleWidth > 0)
+        xPos+=10;
 
     for(int i = 0 ; i < self.itemCount; i ++)
     {       
