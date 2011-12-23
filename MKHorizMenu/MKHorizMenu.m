@@ -28,6 +28,7 @@
 @synthesize itemSelectedDelegate;
 @synthesize dataSource;
 @synthesize itemCount = _itemCount;
+@synthesize selectedRect;
 
 -(void) awakeFromNib
 {
@@ -82,6 +83,8 @@
 {
     UIButton *thisButton = (UIButton*) [self viewWithTag:index + kButtonBaseTag];    
     thisButton.selected = YES;
+    selectedRect = thisButton.frame;
+
     [self setContentOffset:CGPointMake(thisButton.frame.origin.x - kLeftOffset, 0) animated:animated];
     [self.itemSelectedDelegate horizMenu:self itemSelectedAtIndex:index];
 }
@@ -93,24 +96,17 @@
     for(int i = 0; i < self.itemCount; i++)
     {
         UIButton *thisButton = (UIButton*) [self viewWithTag:i + kButtonBaseTag];
-        if(i + kButtonBaseTag == button.tag)
+        if(i + kButtonBaseTag == button.tag) {
             thisButton.selected = YES;
-        else
+            selectedRect = thisButton.frame;
+        }
+        else {
             thisButton.selected = NO;
+        }
     }
     
     [self.itemSelectedDelegate horizMenu:self itemSelectedAtIndex:button.tag - kButtonBaseTag];
 }
 
-
-- (void)dealloc
-{
-    [_selectedImage release];
-    _selectedImage = nil;
-    [_titles release];
-    _titles = nil;
-    
-    [super dealloc];
-}
 
 @end

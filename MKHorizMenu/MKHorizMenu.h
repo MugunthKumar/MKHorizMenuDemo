@@ -36,20 +36,14 @@
 - (void)horizMenu:(MKHorizMenu*) horizMenu itemSelectedAtIndex:(NSUInteger) index;
 @end
 
-@interface MKHorizMenu : UIScrollView {
+@interface MKHorizMenu : UIScrollView
 
-    int _itemCount;
-    UIImage *_selectedImage;
-    NSMutableArray *_titles;
-    id <MKHorizMenuDataSource> dataSource;
-    id <MKHorizMenuDelegate> itemSelectedDelegate;
-}
-
-@property (nonatomic, retain) NSMutableArray *titles;
-@property (nonatomic, assign) IBOutlet id <MKHorizMenuDelegate> itemSelectedDelegate;
-@property (nonatomic, retain) IBOutlet id <MKHorizMenuDataSource> dataSource;
-@property (nonatomic, retain) UIImage *selectedImage;
-@property (nonatomic, assign) int itemCount;
+@property (nonatomic, strong) NSMutableArray *titles;
+@property (nonatomic, weak) IBOutlet id <MKHorizMenuDelegate> itemSelectedDelegate;
+@property (nonatomic, strong) IBOutlet id <MKHorizMenuDataSource> dataSource;
+@property (nonatomic, strong) UIImage *selectedImage;
+@property (nonatomic) int itemCount;
+@property (nonatomic) CGRect selectedRect;
 
 -(void) reloadData;
 -(void) setSelectedIndex:(int) index animated:(BOOL) animated;
