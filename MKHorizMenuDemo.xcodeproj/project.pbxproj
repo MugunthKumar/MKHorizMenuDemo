@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3793CB12154981F9002A57ED /* ButtonSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3793CB11154981F9002A57ED /* ButtonSelected@2x.png */; };
 		AB369A6A1366816200888B0E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB369A691366816200888B0E /* UIKit.framework */; };
 		AB369A6C1366816200888B0E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB369A6B1366816200888B0E /* Foundation.framework */; };
 		AB369A6E1366816200888B0E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB369A6D1366816200888B0E /* CoreGraphics.framework */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3793CB11154981F9002A57ED /* ButtonSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSelected@2x.png"; sourceTree = "<group>"; };
 		AB369A651366816200888B0E /* MKHorizMenuDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MKHorizMenuDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB369A691366816200888B0E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AB369A6B1366816200888B0E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				AB369AA21366830900888B0E /* ButtonSelected.png */,
+				3793CB11154981F9002A57ED /* ButtonSelected@2x.png */,
 				AB369AA31366830900888B0E /* MenuBar.png */,
 				AB369AA41366830900888B0E /* MenuBar@2x.png */,
 				AB369AA51366830900888B0E /* MKHorizMenu.h */,
@@ -179,6 +182,7 @@
 				AB369AA71366830900888B0E /* ButtonSelected.png in Resources */,
 				AB369AA81366830900888B0E /* MenuBar.png in Resources */,
 				AB369AA91366830900888B0E /* MenuBar@2x.png in Resources */,
+				3793CB12154981F9002A57ED /* ButtonSelected@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
