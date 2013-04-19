@@ -42,6 +42,11 @@
      
 -(void) reloadData
 {
+    NSArray *viewsToRemove = [self subviews];
+	for (UIView *v in viewsToRemove) {
+		[v removeFromSuperview];
+	}
+    
     self.itemCount = [dataSource numberOfItemsForMenu:self];
     self.backgroundColor = [dataSource backgroundColorForMenu:self];
     self.selectedImage = [dataSource selectedItemImageForMenu:self];
