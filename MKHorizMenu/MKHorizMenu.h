@@ -23,12 +23,15 @@
 @class MKHorizMenu;
 
 @protocol MKHorizMenuDataSource <NSObject>
+@optional
+- (int) seperatorPaddingForMenu:(MKHorizMenu*) tabView;
+- (UIColor*) seperatorColorForMenu:(MKHorizMenu*) tabView;
+- (int) itemPaddingForMenu:(MKHorizMenu*) tabView;
 @required
-- (UIImage*) selectedItemImageForMenu:(MKHorizMenu*) tabView;
+- (UIControl*) horizMenu:(MKHorizMenu*) horizMenu buttonForItemAtIndex:(NSUInteger) index;
+- (NSString*) horizMenu:(MKHorizMenu*) horizMenu titleForItemAtIndex:(NSUInteger) index;
 - (UIColor*) backgroundColorForMenu:(MKHorizMenu*) tabView;
 - (int) numberOfItemsForMenu:(MKHorizMenu*) tabView;
-
-- (NSString*) horizMenu:(MKHorizMenu*) horizMenu titleForItemAtIndex:(NSUInteger) index;
 @end
 
 @protocol MKHorizMenuDelegate <NSObject>
@@ -39,17 +42,28 @@
 @interface MKHorizMenu : UIScrollView {
 
     int _itemCount;
+    int _seperatorPadding;
+    int _itemPadding;
     UIImage *_selectedImage;
+    UIFont  *_font;
+    UILabel *_titleLabel;
     NSMutableArray *_titles;
     id <MKHorizMenuDataSource> dataSource;
     id <MKHorizMenuDelegate> itemSelectedDelegate;
 }
 
 @property (nonatomic, retain) NSMutableArray *titles;
+@property (nonatomic, readonly) UILabel *titleLabel;
 @property (nonatomic, assign) IBOutlet id <MKHorizMenuDelegate> itemSelectedDelegate;
 @property (nonatomic, retain) IBOutlet id <MKHorizMenuDataSource> dataSource;
-@property (nonatomic, retain) UIImage *selectedImage;
+
 @property (nonatomic, assign) int itemCount;
+
+@property (nonatomic, retain) UIImage *selectedImage;
+@property (nonatomic, assign) int seperatorPadding;
+@property (nonatomic, assign) int itemPadding;
+@property (nonatomic, retain) UIFont *font;
+
 
 -(void) reloadData;
 -(void) setSelectedIndex:(int) index animated:(BOOL) animated;

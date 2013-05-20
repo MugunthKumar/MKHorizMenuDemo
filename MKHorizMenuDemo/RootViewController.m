@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad
 {
+//    self.horizMenu.font = [UIFont boldSystemFontOfSize:15];
     self.items = [NSArray arrayWithObjects:@"Headlines", @"UK", @"International", @"Politics", @"Weather", @"Travel", @"Radio", @"Hollywood", @"Sports", @"Others", nil];    
     [self.horizMenu reloadData];
     [super viewDidLoad];
@@ -51,9 +52,34 @@
 
 #pragma mark -
 #pragma mark HorizMenu Data Source
-- (UIImage*) selectedItemImageForMenu:(MKHorizMenu*) tabMenu
+
+-(UIControl *)horizMenu:(MKHorizMenu *)horizMenu buttonForItemAtIndex:(NSUInteger)index
 {
-    return [[UIImage imageNamed:@"ButtonSelected"] stretchableImageWithLeftCapWidth:16 topCapHeight:0];
+    UIButton *customButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIColor  *textColorForButton = [UIColor whiteColor];
+    UIColor  *selectedTextColorForButton = [UIColor whiteColor];
+    NSString *title = [self horizMenu:horizMenu titleForItemAtIndex:index];
+    
+    if (index == 4) 
+        textColorForButton = [UIColor magentaColor];
+    
+    [customButton setTitle:title forState:UIControlStateNormal];
+    [customButton setTitleColor:textColorForButton forState:UIControlStateNormal];
+    [customButton setTitleColor:selectedTextColorForButton forState:UIControlStateSelected];
+    customButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+
+    return customButton;
+}
+
+- (NSString *)horizMenu:(MKHorizMenu *)horizMenu titleForItemAtIndex:(NSUInteger)index
+{
+    
+    return [self.items objectAtIndex:index];
+}
+
+-(UIColor *)seperatorColorForMenu:(MKHorizMenu *)tabView
+{
+    return [UIColor whiteColor];
 }
 
 - (UIColor*) backgroundColorForMenu:(MKHorizMenu *)tabView
@@ -66,9 +92,14 @@
     return [self.items count];
 }
 
-- (NSString*) horizMenu:(MKHorizMenu *)horizMenu titleForItemAtIndex:(NSUInteger)index
+- (int) itemPaddingForMenu:(MKHorizMenu *)tabView
 {
-    return [self.items objectAtIndex:index];
+    return 0;
+}
+
+- (int)seperatorPaddingForMenu:(MKHorizMenu *)tabView
+{
+    return 25;
 }
 
 #pragma mark -

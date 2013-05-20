@@ -17,20 +17,43 @@
 //	if you are re-publishing after editing, please retain the above copyright notices
 
 #import "MKHorizMenu.h"
+#define kTitleLabelTag 0x6C746974
 #define kButtonBaseTag 10000
-#define kLeftOffset 10
+
+@interface MKHorizMenu () 
+-(void) setup;
+@end
 
 @implementation MKHorizMenu
 
 @synthesize titles = _titles;
+@synthesize titleLabel = _titleLabel;
 @synthesize selectedImage = _selectedImage;
 
 @synthesize itemSelectedDelegate;
 @synthesize dataSource;
 @synthesize itemCount = _itemCount;
+@synthesize seperatorPadding = _seperatorPadding;
+@synthesize itemPadding = _itemPadding;
+@synthesize font = _font;
 
--(void) awakeFromNib
+- (id)initWithFrame:(CGRect)frame 
 {
+    self = [super initWithFrame:frame];
+    if (self) 
+    {
+        [self setup];
+    }
+    return self;
+}
+
+-(void) setup
+{
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 7, 100, 100)];
+    _titleLabel.backgroundColor = [UIColor clearColor];
+    _titleLabel.tag = kTitleLabelTag;
+    [self addSubview:_titleLabel];
+
     self.bounces = YES;
     self.scrollEnabled = YES;
     self.alwaysBounceHorizontal = YES;
@@ -38,43 +61,89 @@
     self.showsHorizontalScrollIndicator = NO;
     self.showsVerticalScrollIndicator = NO;
     [self reloadData];
+
+}
+
+-(void) awakeFromNib
+{
+    [self setup];
 }
      
 -(void) reloadData
 {
+    for (UIView *view in self.subviews) 
+    {
+        if(view.tag != kTitleLabelTag)
+            [view removeFromSuperview];
+    }
+    
+    [self.titles release];
+    self.titles = [[NSMutableArray alloc] initWithCapacity:10];
+    
     self.itemCount = [dataSource numberOfItemsForMenu:self];
     self.backgroundColor = [dataSource backgroundColorForMenu:self];
-    self.selectedImage = [dataSource selectedItemImageForMenu:self];
+    
+    if ([dataSource respondsToSelector:@selector(seperatorPaddingForMenu:)]) 
+        self.seperatorPadding = [dataSource seperatorPaddingForMenu:self];
+    else
+        self.seperatorPadding = 10;
 
-    UIFont *buttonFont = [UIFont boldSystemFontOfSize:15];
-    int buttonPadding = 25;
+    if ([dataSource respondsToSelector:@selector(itemPaddingForMenu:)]) 
+        self.itemPadding = [dataSource itemPaddingForMenu:self];
+    else
+        self.itemPadding = 10;
+        
+    int titleWidth = [_titleLabel sizeThatFits: CGSizeMake(320, self.bounds.size.height-7*2) ].width;
+
+    _titleLabel.frame = CGRectMake(10, 7, titleWidth, self.bounds.size.height-7*2);
+    [_titleLabel setNeedsDisplay];
     
     int tag = kButtonBaseTag;    
-    int xPos = kLeftOffset;
+    int xPos = titleWidth + 10;//self.seperatorPadding;
+    
+    if(titleWidth > 0)
+        xPos+=10;
 
     for(int i = 0 ; i < self.itemCount; i ++)
-    {
+    {       
+        UIColor *seperatorColor = [UIColor blackColor];
+        
+        if([dataSource respondsToSelector:@selector(seperatorColorForMenu:)])
+            seperatorColor = [dataSource seperatorColorForMenu:self];
+        
+        UIControl *customButton;
+        
+        if ([dataSource respondsToSelector:@selector(horizMenu:buttonForItemAtIndex:)])
+            customButton = [dataSource horizMenu:self buttonForItemAtIndex:i];
+        
         NSString *title = [dataSource horizMenu:self titleForItemAtIndex:i];
-        UIButton *customButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [customButton setTitle:title forState:UIControlStateNormal];
-        customButton.titleLabel.font = buttonFont;
-        
-        [customButton setBackgroundImage:self.selectedImage forState:UIControlStateSelected];
-        
+        [self.titles addObject:title];
+                       
         customButton.tag = tag++;
         [customButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
         
-        int buttonWidth = [title sizeWithFont:customButton.titleLabel.font
-                            constrainedToSize:CGSizeMake(150, 28) 
-                                lineBreakMode:UILineBreakModeClip].width;
+        int buttonWidth = [customButton sizeThatFits: CGSizeMake(320, self.bounds.size.height-7*2) ].width;
         
-        customButton.frame = CGRectMake(xPos, 7, buttonWidth + buttonPadding, 28);
+        customButton.frame = CGRectMake(xPos, 7, buttonWidth + self.itemPadding, self.bounds.size.height-7*2);
         xPos += buttonWidth;
-        xPos += buttonPadding;
+        xPos += self.itemPadding;
         [self addSubview:customButton];        
+        
+        if (i < self.itemCount-1) 
+        {
+            UILabel *seperatorLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPos, 7, self.seperatorPadding, self.bounds.size.height-7*2)];
+            seperatorLabel.textAlignment = UITextAlignmentCenter;
+            seperatorLabel.font = self.font;
+            seperatorLabel.text = @"•";
+            seperatorLabel.textColor = seperatorColor;
+            seperatorLabel.backgroundColor = [UIColor clearColor];
+            seperatorLabel.opaque = YES;
+            [self addSubview:seperatorLabel];
+            xPos += self.seperatorPadding;
+        }
     }
-    self.contentSize = CGSizeMake(xPos, 41);    
-    [self layoutSubviews];  
+    self.contentSize = CGSizeMake(xPos+10, self.bounds.size.height);    
+    [self layoutSubviews];
 }
 
 
@@ -82,7 +151,7 @@
 {
     UIButton *thisButton = (UIButton*) [self viewWithTag:index + kButtonBaseTag];    
     thisButton.selected = YES;
-    [self setContentOffset:CGPointMake(thisButton.frame.origin.x - kLeftOffset, 0) animated:animated];
+    [self setContentOffset:CGPointMake(thisButton.frame.origin.x - self.seperatorPadding, 0) animated:animated];
     [self.itemSelectedDelegate horizMenu:self itemSelectedAtIndex:index];
 }
 
@@ -109,6 +178,8 @@
     _selectedImage = nil;
     [_titles release];
     _titles = nil;
+    [_font release];
+    _font = nil;
     
     [super dealloc];
 }
